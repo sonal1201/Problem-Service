@@ -1,13 +1,16 @@
+const notImplementedError = require("../errors/notImplementedError");
+
 function ping(req, res) {
     return res.send({ msg: "Ping Checked" })
 }
 
-function addProblem(req, res) {
+function addProblem(req, res, next) {
 
-    return res.status(501).json({
-        Message: "Not Implemented"
-    })
-
+    try {
+        throw new notImplementedError('addProblem');
+    } catch (error) {
+        next(error);
+    }
 }
 
 function getProblem(req, res) {
