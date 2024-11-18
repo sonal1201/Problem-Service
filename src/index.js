@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyparser = require('body-parser')
-const { PORT } = require('./config/server');
+const { PORT, MONGO } = require('./config/server');
 const apiRouter = require('./routes');
-const baseError = require('./errors/baseError');
-const notFoundError = require('./errors/NotFoundError');
 const errorHandler = require('./utils/errorHandler');
+const connectToDB = require('./config/dbConfig');
+const mongoose = require('mongoose')
 
 const app = express();
 
@@ -21,16 +21,10 @@ app.use('/api', apiRouter)
 
 app.use(errorHandler)
 
-app.listen(PORT, () => {
+
+app.listen(PORT, async () => {
     console.log(`Server started at : ${PORT}`)
 
-    try {
-
-        throw new notFoundError({})
-        
-    } catch (error) {
-        
-    }
-
-
+    await connectToDB();
+    console.log("Db successFully Connected");
 })
