@@ -1,4 +1,5 @@
 const notImplementedError = require("../errors/notImplementedError");
+const serviceUnavailabe = require("../errors/serviceUnavailable");
 
 function ping(req, res) {
     return res.send({ msg: "Ping Checked" })
@@ -13,17 +14,20 @@ function addProblem(req, res, next) {
     }
 }
 
-function getProblem(req, res) {
+function getProblem(req, res,next) {  
     return res.status(501).json({
         Message: "Not Implemented"
     })
 
 }
 
-function getProblems(req, res) {
-    return res.status(501).json({
-        Message: "Not Implemented"
-    })
+function getProblems(req, res,next) {
+    try {
+        throw new serviceUnavailabe('getProblems')
+    } catch (error) {
+        next(error)
+
+    }
 
 }
 
