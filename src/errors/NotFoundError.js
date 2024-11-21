@@ -1,8 +1,10 @@
 const baseError = require("./baseError");
 
-class notFoundError extends baseError{
-    constructor(details){
-        super("Not Found Error",404,"Resource Not Found",details)
+class notFoundError extends baseError {
+    constructor(resourceName, resourceValue) {
+        super("Not Found Error", 404, `${resourceName}: not found with value: ${resourceValue}`, {
+            resourceName, resourceValue
+        })
     }
 
 }
