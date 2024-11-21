@@ -14,11 +14,11 @@ const ProblemSchema = new mongoose.Schema({
         type: String,
         enum: ['Easy', 'Medium', 'Hard'],
         required: [true, 'Diffculty cannot be empty'],
-        default: "easy"
+        default: "Easy"
     },
 
     //Array OF Object 
-    testCase: [
+    testcase: [
         {
             input: {
                 type: String,
