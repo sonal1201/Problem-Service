@@ -1,3 +1,4 @@
+const logger = require("../config/loggerConfig");
 const notImplementedError = require("../errors/notImplementedError");
 const serviceUnavailabe = require("../errors/serviceUnavailable");
 const { ProblemRepository } = require("../repositories");
@@ -72,6 +73,7 @@ async function deleteProblem(req, res, next) {
             data: deleteProblem
         })
     } catch (error) {
+        
         next(error)
     }
 
@@ -84,7 +86,7 @@ async function updateProblem(req, res, next) {
         res.status(201).send({
             success: true,
             message: "Problem Updated successFully",
-            error:{},
+            error: {},
             data: update_Problem
         })
     } catch (error) {
